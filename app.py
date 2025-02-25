@@ -54,7 +54,12 @@ def home():
 def message():
     data = request.get_json()  # Get JSON data from request body
     print("Received Data:", data)  # Print received data to the console
-    return jsonify({"message": "good", "received": data})  # Send response back
+
+    # Validate incoming data
+    if not data or "bpm" not in data or "temperature" not in data:
+        return jsonify({"error": "Missing bpm or temperature data"}), 400
+
+    return jsonify({"message": "Data received", "bpm": data["bpm"], "temperature": data["temperature"]})
 
 @app.route("/predict", methods=["POST"])
 def predict():
