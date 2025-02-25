@@ -44,14 +44,15 @@ def inference_stress(data):
 
     return {"id": id_, "stress": status, "average_stress": f"{avg_stress * 100:.2f}%"}
 
-# @app.route("/")
-# def home():
-#     return render_template("index.html")
-
 @app.route("/")
 def home():
-    return render_template("index.html"), {"message": "good"}
+    return render_template("index.html")
 
+@app.route("/data", methods=["POST"]) 
+def message():
+    data = request.get_json()  # Get JSON data from request body
+    print("Received Data:", data)  # Print received data to the console
+    return jsonify({"message": "good", "received": data})  # Send response back
 
 @app.route("/predict", methods=["POST"])
 def predict():
