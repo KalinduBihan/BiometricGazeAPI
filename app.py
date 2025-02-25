@@ -44,9 +44,14 @@ def inference_stress(data):
 
     return {"id": id_, "stress": status, "average_stress": f"{avg_stress * 100:.2f}%"}
 
+# @app.route("/")
+# def home():
+#     return render_template("index.html")
+
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html"), {"message": "good"}
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
